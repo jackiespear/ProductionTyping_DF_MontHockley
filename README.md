@@ -1,5 +1,5 @@
-# A production effect and directed forgetting effect experiment.
-## A jsPsych experiment - Categorized Lists from Montagliani & Hockley, 2019
+# A production effect and directed forgetting effect experiment
+### A jsPsych experiment - Categorized Lists from Montagliani & Hockley, 2019
 
 This is recognition production effect and directed forgetting experiment with semantically similar words from categorized lists.
 
