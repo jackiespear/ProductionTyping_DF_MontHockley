@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -44,9 +45,19 @@
  
 <script>
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                       Randomly Assign one of the between-subjects counterbalanced lists              //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                       Randomly Assign one of the between-subjects counterbalanced lists, experiments and cue conditions                      //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+var experiment_assignment = jsPsych.randomization.sampleWithoutReplacement(['production_effect', 'directed_forgetting'], 1[0]);
+jsPsych.data.addProperties({
+  experiment: experiment_assignment
+});
+
+var during_after_assignment = jsPsych.randomization.sampleWithoutReplacement(['during', 'after'], 1[0]);
+jsPsych.data.addProperties({
+  cue_presentation: during_after_assignment
+});
 
 var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(['mixed', 'pureproduce', 'pureread'], 1)[0];
 jsPsych.data.addProperties({
@@ -61,121 +72,521 @@ jsPsych.data.addProperties({
 console.log(condition_assignment);
 //console.log(list_assignment);
 
-//randomization procedure
-/* var stimuli = [];
-var stimuli_test= [];
-if (condition_assignment == "mixed" && list_assignment == "List1" ) { //if List1 is sampled from above randomization routine, the stimuli presented will be...
-  stimuli = studylist1_mixed;
-  stimuli_test = testlist1;
-  front_buffer_list = frontbufferlist_mixed;
-  end_buffer_list = endbufferlist_mixed;
-} else if (condition_assignment == "pureread" && list_assignment == "List1") {
-  stimuli = studylist1_pureread;
-  stimuli_test = testlist1;
-  front_buffer_list = frontbufferlist_pureread;
-  end_buffer_list = endbufferlist_pureread;
-
-} else if (condition_assignment == "mixed" && list_assignment =="List2") {
-  stimuli = studylist2_mixed;
-  stimuli_test = testlist2;
-  front_buffer_list = frontbufferlist_mixed;
-  end_buffer_list = endbufferlist_mixed;
-} else if (condition_assignment == "pureread" && list_assignment =="List2") {
-  stimuli = studylist2_pureread;
-  stimuli_test = testlist2;
-  front_buffer_list = frontbufferlist_pureread;
-  end_buffer_list = endbufferlist_pureread;
-
-} else if (condition_assignment == "mixed" && list_assignment =="List3") {
-  stimuli = studylist3_mixed;
-  stimuli_test = testlist3;
-  front_buffer_list = frontbufferlist_mixed;
-  end_buffer_list = endbufferlist_mixed;
-} else if (condition_assignment == "pureread" && list_assignment =="List3") {
-  stimuli = studylist3_pureread;
-  stimuli_test = testlist3;
-  front_buffer_list = frontbufferlist_pureread;
-  end_buffer_list = endbufferlist_pureread;
-
-} else if (condition_assignment == "mixed" && list_assignment =="List4") {
-  stimuli = studylist4_mixed;
-  stimuli_test = testlist4;
-  front_buffer_list = frontbufferlist_mixed;
-  end_buffer_list = endbufferlist_mixed;
-} else if (condition_assignment == "pureread" && list_assignment =="List4") {
-  stimuli = studylist4_pureread;
-  stimuli_test = testlist4;
-  front_buffer_list = frontbufferlist_pureread;
-  end_buffer_list = endbufferlist_pureread;
-};  */ 
-
 //original randomization procedure
 var stimuli = [];
 var stimuli_test= [];
-if (condition_assignment == "mixed" && list_assignment == "List1" ) { //if List1 is sampled from above randomization routine, the stimuli presented will be...
+var instruction_text = []; //this and the following variables are depending on whether the exp is PE of DF
+var post_practice_text = [];
+var post_practice_text2 = [];
+var test_instruction_text = [];
+var study_procedure = []; //cue to produce/read, remember/forget is either during stimuli presentation or after
+
+if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && before_after_assignment == "during") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
   stimuli = studylist1_mixed;
   stimuli_test = testlist1;
   front_buffer_list = frontbufferlist_mixed;
   end_buffer_list = endbufferlist_mixed;
-} else if (condition_assignment == "pureproduce" && list_assignment =="List1") {
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_during;
+
+} else if (condition_assignment == "pureproduce" && list_assignment =="List1" && experiment_assignment =="production_effect" && before_after_assignment == "during") {
   stimuli = studylist1_pureproduce;
   stimuli_test = testlist1;
   front_buffer_list = frontbufferlist_pureproduce;
   end_buffer_list = endbufferlist_pureproduce;
-} else if (condition_assignment == "pureread" && list_assignment == "List1") {
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureread" && list_assignment == "List1" && experiment_assignment =="production_effect" && before_after_assignment == "during") {
   stimuli = studylist1_pureread;
   stimuli_test = testlist1;
   front_buffer_list = frontbufferlist_pureread;
   end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_during;
 
-} else if (condition_assignment == "mixed" && list_assignment =="List2") {
+} else if (condition_assignment == "mixed" && list_assignment =="List2" && experiment_assignment =="production_effect" && before_after_assignment == "during") {
   stimuli = studylist2_mixed;
   stimuli_test = testlist2;
   front_buffer_list = frontbufferlist_mixed;
   end_buffer_list = endbufferlist_mixed;
-} else if (condition_assignment == "pureproduce" && list_assignment =="List2") {
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List2" && experiment_assignment =="production_effect" && before_after_assignment == "during") {
   stimuli = studylist2_pureproduce;
   stimuli_test = testlist2;
   front_buffer_list = frontbufferlist_pureproduce;
   end_buffer_list = endbufferlist_pureproduce;
-} else if (condition_assignment == "pureread" && list_assignment =="List2") {
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureread" && list_assignment =="List2" && experiment_assignment =="production_effect" && before_after_assignment == "during") {
   stimuli = studylist2_pureread;
   stimuli_test = testlist2;
   front_buffer_list = frontbufferlist_pureread;
   end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_during;
 
-} else if (condition_assignment == "mixed" && list_assignment =="List3") {
+} else if (condition_assignment == "mixed" && list_assignment =="List3" && experiment_assignment =="production_effect" && before_after_assignment == "during") {
   stimuli = studylist3_mixed;
   stimuli_test = testlist3;
   front_buffer_list = frontbufferlist_mixed;
   end_buffer_list = endbufferlist_mixed;
-} else if (condition_assignment == "pureproduce" && list_assignment =="List3") {
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List3" && experiment_assignment =="production_effect" && before_after_assignment == "during") {
   stimuli = studylist3_pureproduce;
   stimuli_test = testlist3;
   front_buffer_list = frontbufferlist_pureproduce;
   end_buffer_list = endbufferlist_pureproduce;
-} else if (condition_assignment == "pureread" && list_assignment =="List3") {
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureread" && list_assignment =="List3" && experiment_assignment =="production_effect" && before_after_assignment == "during") {
   stimuli = studylist3_pureread;
   stimuli_test = testlist3;
   front_buffer_list = frontbufferlist_pureread;
   end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_during;
 
-} else if (condition_assignment == "mixed" && list_assignment =="List4") {
+} else if (condition_assignment == "mixed" && list_assignment =="List4" && experiment_assignment =="production_effect" && before_after_assignment == "during") {
   stimuli = studylist4_mixed;
   stimuli_test = testlist4;
   front_buffer_list = frontbufferlist_mixed;
   end_buffer_list = endbufferlist_mixed;
-} else if (condition_assignment == "pureproduce" && list_assignment =="List4") {
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List4" && experiment_assignment =="production_effect" && before_after_assignment == "during") {
   stimuli = studylist4_pureproduce;
   stimuli_test = testlist4;
   front_buffer_list = frontbufferlist_pureproduce;
   end_buffer_list = endbufferlist_pureproduce;
-} else if (condition_assignment == "pureread" && list_assignment =="List4") {
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureread" && list_assignment =="List4" && experiment_assignment =="production_effect" && before_after_assignment == "during") {
   stimuli = studylist4_pureread;
   stimuli_test = testlist4;
   front_buffer_list = frontbufferlist_pureread;
   end_buffer_list = endbufferlist_pureread;
-}; 
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_during;
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////                             Directed Forgetting Randomization                      /////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+} else if(condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="directed_forgetting" && before_after_assignment == "during") { 
+  stimuli = studylist1_mixed;
+  stimuli_test = testlist1;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List1" && experiment_assignment =="directed_forgetting" && before_after_assignment == "during") {
+  stimuli = studylist1_pureproduce;
+  stimuli_test = testlist1;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureread" && list_assignment == "List1" && experiment_assignment =="directed_forgetting" && before_after_assignment == "during") {
+  stimuli = studylist1_pureread;
+  stimuli_test = testlist1;
+  front_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_during;
+
+} else if (condition_assignment == "mixed" && list_assignment =="List2" && experiment_assignment =="directed_forgetting" && before_after_assignment == "during") {
+  stimuli = studylist2_mixed;
+  stimuli_test = testlist2;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List2" && experiment_assignment =="directed_forgetting" && before_after_assignment == "during") {
+  stimuli = studylist2_pureproduce;
+  stimuli_test = testlist2;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureread" && list_assignment =="List2" && experiment_assignment =="directed_forgetting" && before_after_assignment == "during") {
+  stimuli = studylist2_pureread;
+  stimuli_test = testlist2;
+  front_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_during;
+
+} else if (condition_assignment == "mixed" && list_assignment =="List3" && experiment_assignment =="directed_forgetting" && before_after_assignment == "during") {
+  stimuli = studylist3_mixed;
+  stimuli_test = testlist3;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List3" && experiment_assignment =="directed_forgetting" && before_after_assignment == "during") {
+  stimuli = studylist3_pureproduce;
+  stimuli_test = testlist3;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureread" && list_assignment =="List3" && experiment_assignment =="directed_forgetting" && before_after_assignment == "during") {
+  stimuli = studylist3_pureread;
+  stimuli_test = testlist3;
+  front_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_during;
+
+} else if (condition_assignment == "mixed" && list_assignment =="List4" && experiment_assignment =="directed_forgetting" && before_after_assignment == "during") {
+  stimuli = studylist4_mixed;
+  stimuli_test = testlist4;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List4" && experiment_assignment =="directed_forgetting" && before_after_assignment == "during") {
+  stimuli = studylist4_pureproduce;
+  stimuli_test = testlist4;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_during;
+} else if (condition_assignment == "pureread" && list_assignment =="List4" && experiment_assignment =="directed_forgetting" && before_after_assignment == "during") {
+  stimuli = studylist4_pureread;
+  stimuli_test = testlist4;
+  front_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_during;
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////                                 Cue presentation AFTER randomization               //////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+} else if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && before_after_assignment == "after") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
+  stimuli = studylist1_mixed;
+  stimuli_test = testlist1;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_after;
+
+} else if (condition_assignment == "pureproduce" && list_assignment =="List1" && experiment_assignment =="production_effect" && before_after_assignment == "after") {
+  stimuli = studylist1_pureproduce;
+  stimuli_test = testlist1;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureread" && list_assignment == "List1" && experiment_assignment =="production_effect" && before_after_assignment == "after") {
+  stimuli = studylist1_pureread;
+  stimuli_test = testlist1;
+  front_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_after;
+
+} else if (condition_assignment == "mixed" && list_assignment =="List2" && experiment_assignment =="production_effect" && before_after_assignment == "after") {
+  stimuli = studylist2_mixed;
+  stimuli_test = testlist2;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List2" && experiment_assignment =="production_effect" && before_after_assignment == "after") {
+  stimuli = studylist2_pureproduce;
+  stimuli_test = testlist2;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureread" && list_assignment =="List2" && experiment_assignment =="production_effect" && before_after_assignment == "after") {
+  stimuli = studylist2_pureread;
+  stimuli_test = testlist2;
+  front_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_after;
+
+} else if (condition_assignment == "mixed" && list_assignment =="List3" && experiment_assignment =="production_effect" && before_after_assignment == "after") {
+  stimuli = studylist3_mixed;
+  stimuli_test = testlist3;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List3" && experiment_assignment =="production_effect" && before_after_assignment == "after") {
+  stimuli = studylist3_pureproduce;
+  stimuli_test = testlist3;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureread" && list_assignment =="List3" && experiment_assignment =="production_effect" && before_after_assignment == "after") {
+  stimuli = studylist3_pureread;
+  stimuli_test = testlist3;
+  front_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_after;
+
+} else if (condition_assignment == "mixed" && list_assignment =="List4" && experiment_assignment =="production_effect" && before_after_assignment == "after") {
+  stimuli = studylist4_mixed;
+  stimuli_test = testlist4;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List4" && experiment_assignment =="production_effect" && before_after_assignment == "after") {
+  stimuli = studylist4_pureproduce;
+  stimuli_test = testlist4;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureread" && list_assignment =="List4" && experiment_assignment =="production_effect" && before_after_assignment == "after") {
+  stimuli = studylist4_pureread;
+  stimuli_test = testlist4;
+  front_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_PE; 
+  post_practice_text = post_practice_text_PE;
+  post_practice_text2 = post_practice_text2_PE;
+  test_instruction_text = test_instruction_text_PE;
+  study_procedure = study_procedure_after;
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////                     Directed Forgetting Randomization               ////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+} else if(condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="directed_forgetting" && before_after_assignment == "after") { 
+  stimuli = studylist1_mixed;
+  stimuli_test = testlist1;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List1" && experiment_assignment =="directed_forgetting" && before_after_assignment == "after") {
+  stimuli = studylist1_pureproduce;
+  stimuli_test = testlist1;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureread" && list_assignment == "List1" && experiment_assignment =="directed_forgetting" && before_after_assignment == "after") {
+  stimuli = studylist1_pureread;
+  stimuli_test = testlist1;
+  front_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_after;
+
+} else if (condition_assignment == "mixed" && list_assignment =="List2" && experiment_assignment =="directed_forgetting" && before_after_assignment == "after") {
+  stimuli = studylist2_mixed;
+  stimuli_test = testlist2;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List2" && experiment_assignment =="directed_forgetting" && before_after_assignment == "after") {
+  stimuli = studylist2_pureproduce;
+  stimuli_test = testlist2;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureread" && list_assignment =="List2" && experiment_assignment =="directed_forgetting" && before_after_assignment == "after") {
+  stimuli = studylist2_pureread;
+  stimuli_test = testlist2;
+  front_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_after;
+
+} else if (condition_assignment == "mixed" && list_assignment =="List3" && experiment_assignment =="directed_forgetting" && before_after_assignment == "after") {
+  stimuli = studylist3_mixed;
+  stimuli_test = testlist3;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List3" && experiment_assignment =="directed_forgetting" && before_after_assignment == "after") {
+  stimuli = studylist3_pureproduce;
+  stimuli_test = testlist3;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureread" && list_assignment =="List3" && experiment_assignment =="directed_forgetting" && before_after_assignment == "after") {
+  stimuli = studylist3_pureread;
+  stimuli_test = testlist3;
+  front_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_after;
+
+} else if (condition_assignment == "mixed" && list_assignment =="List4" && experiment_assignment =="directed_forgetting" && before_after_assignment == "after") {
+  stimuli = studylist4_mixed;
+  stimuli_test = testlist4;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List4" && experiment_assignment =="directed_forgetting" && before_after_assignment == "after") {
+  stimuli = studylist4_pureproduce;
+  stimuli_test = testlist4;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_after;
+} else if (condition_assignment == "pureread" && list_assignment =="List4" && experiment_assignment =="directed_forgetting" && before_after_assignment == "after") {
+  stimuli = studylist4_pureread;
+  stimuli_test = testlist4;
+  front_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
+  instruction_text = instruction_text_DF; 
+  post_practice_text = post_practice_text_DF;
+  post_practice_text2 = post_practice_text2_DF;
+  test_instruction_text = test_instruction_text_DF;
+  study_procedure = study_procedure_after;
+};
 
 
 //console.table(stimuli);
@@ -441,19 +852,7 @@ var practice_test_procedure = {
   timeline_variables: practest,
 };
 
-/* var correct_response_message = {
-  type: 'html-keyboard-response',
-  stimulus: '<p>Correct!</p>',
-  choices: 'NO_KEYS',
-  trial_duration: 1000,
-};
 
-var correct_conditional = {
-  timeline: [correct_response_message],
-  conditional_function: function() {
-    var last_trial = jsPsych.data.get().filter({phase: 'prac_test'}).last(1);
-  }
-} */
 
 // pre PRACTICE phase instructions
 var practice_test_instructions_pre = {
@@ -555,12 +954,89 @@ var study_end_buffer = {
 };
 
 //Putting the study words and study instruction together
- var study_procedure = {
+ var study_procedure_during = {
    timeline: [study_instructions123], // modifiy this to add the buffer items at the beginning and at the end
    timeline_variables: stimuli,
    randomize_order: true,
  };
 
+
+
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ /////                                Study Phase where cue to Produce/Remember or Read/Forget is presented AFTER item presentation                  //
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ //Present the study words
+var study_instructions123_after_1= {
+    timeline: [
+        {
+            type: 'html-keyboard-response',
+            stimulus: jsPsych.timelineVariable('stimulus'),
+            choices: jsPsych.NO_KEYS,
+            data: {phase:"study", data: jsPsych.timelineVariable("data")},
+            trial_duration: 3000, // words will appear for 2 seconds
+            post_trial_gap: 500 // like a blank 500
+        }
+    ],
+    timeline_variables: stimuli,
+};
+
+var study_instructions123_after_1= {
+    timeline: [
+        {
+            type: 'html-keyboard-response',
+            stimulus: jsPsych.timelineVariable('stimulus'),
+            choices: jsPsych.NO_KEYS,
+            data: {phase:"study", data: jsPsych.timelineVariable("data")},
+            trial_duration: 3000, // words will appear for 2 seconds
+            post_trial_gap: 500 // like a blank 500
+        }
+    ],
+    timeline_variables: stimuli,
+}; 
+
+//Study Phase
+var study_instructions123_after = {
+  timeline: [
+    {
+    type: 'survey-html-form',
+    button_label: 'Press enter to continue',
+    preamble: function(){
+        var html = `
+          <p style='font-size: 48px;'>${jsPsych.timelineVariable('stimulus')}</p>
+          `
+        return html;
+    },
+    html:  '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
+    post_trial_gap: 500, 
+    trial_duration: 3000, //change back to 3000
+    data: {phase:"study", data: jsPsych.timelineVariable("data")},
+    autofocus: 'test-resp-box',
+  }
+],
+timeline_variables: stimuli,
+randomize_order:true,
+};
+
+
+
+
+
+
+ var study_procedure_after = {
+  timeline:[study_instructions123_after1, study_words_colored],
+  timeline_variables: stimuli,
+  randomize_order: true,
+ };
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  //test phase instructions presented after study phase is over
 var test_instructions = {
   type: "html-keyboard-response",
@@ -729,7 +1205,7 @@ timeline.push(practice_test_instructions);
 timeline.push(practice_test_procedure);
 timeline.push(practice_test_instructions_post);
 timeline.push(study_front_buffer);
-timeline.push(study_instructions123); 
+timeline.push(study_procedure); 
 timeline.push(study_end_buffer);
 timeline.push(test_instructions);
 timeline.push(test_phase);
