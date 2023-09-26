@@ -970,23 +970,28 @@ var study_end_buffer = {
  /////                                Study Phase where cue to Produce/Remember or Read/Forget is presented AFTER item presentation                  //
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
- //Present the study words
+ //Present the study words                           ////need to make files of black font and change timelineVaraible 'stimulus' to stimulus_black
 var study_phase_stimuli = {
             type: 'html-keyboard-response',
-            stimulus: jsPsych.timelineVariable('stimulus'),
+            stimulus: function(){
+              var html = `
+                <p style='font-size: 48px; style=color:black;/>${jsPsych.timelineVariable('stimulus')}</p>
+              `
+              return html;
+            },
             choices: jsPsych.NO_KEYS,
             data: {phase:"study", data: jsPsych.timelineVariable("data")},
-            trial_duration: 3000, // words will appear for 2 seconds
-            post_trial_gap: 500 // like a blank 500
+            trial_duration: 1000, // words will appear for 2 seconds
+            post_trial_gap: 0 // like a blank 500
 };
 
 var study_instructions123_after = {
   type: 'survey-html-form',
   button_label: 'Press enter to continue',
-  preamble: jsPsych.timelineVariable("instructions"),
-  html: '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:black;/></p>', //color being white will not mirror typed word to the screen
+  preamble: jsPsych.timelineVariable("stimulus"),
+  html: '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
   post_trial_gap: 500,
-  trial_duration: 2000,
+  trial_duration: 3000,
   data: {phase: "instructions"},
   autofocus: 'test-resp-box',
 };
