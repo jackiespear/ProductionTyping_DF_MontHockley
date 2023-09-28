@@ -26,6 +26,7 @@
         <script src="stimuli/endbufferlist_pureread.js"></script>
         <script src="stimuli/studylist1_mixed.js"></script>
         <script src="stimuli/studylist1_pureproduce.js"></script>
+        <script src="stimuli/studylist1_pureproduce_black.js"></script>
         <script src="stimuli/studylist1_pureread.js"></script>
         <script src="stimuli/studylist2_mixed.js"></script>
         <script src="stimuli/studylist2_pureproduce.js"></script>
@@ -59,12 +60,12 @@ jsPsych.data.addProperties({
   cue_presentation: during_after_assignment
 });
 
-var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(['mixed', 'pureproduce', 'pureread'], 1)[0];
+var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(['pureproduce', 'pureread'], 1)[0];
 jsPsych.data.addProperties({
   condition: condition_assignment
 });
 
-var list_assignment = jsPsych.randomization.sampleWithoutReplacement(['List1', 'List2', 'List3','List4'], 1)[0];
+var list_assignment = jsPsych.randomization.sampleWithoutReplacement(['List1'], 1)[0];
 jsPsych.data.addProperties({
   list: list_assignment
 });
@@ -78,12 +79,38 @@ console.log(list_assignment);
 
 //original randomization procedure
 var stimuli = [];
+var stimuli_black = [];
 var stimuli_test= [];
 var instruction_text = []; //this and the following variables are depending on whether the exp is PE of DF
 var post_practice_text = [];
 var post_practice_text2 = [];
 var test_instruction_text = [];
 var study_procedure = []; //cue to produce/read, remember/forget is either during stimuli presentation or after
+
+//change font color to black for the 'after' condition
+/* studylist1_mixed_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black');
+studylist1_mixed_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
+studylist2_mixed_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black');
+studylist2_mixed_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
+studylist3_mixed_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black');
+studylist3_mixed_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
+studylist4_mixed_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black');
+studylist4_mixed_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
+
+studylist1_pureproduce_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
+studylist2_pureproduce_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
+studylist3_pureproduce_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
+studylist4_pureproduce_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
+
+studylist1_pureread_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black');
+studylist2_pureread_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black');
+studylist3_pureread_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black');
+studylist4_pureread_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black'); */
+
+//console.log(studylist1_pureproduce_black);
+//console.table(studylist1_pureproduce_black);
+
+
 
 if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && during_after_assignment == "during") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
   stimuli = studylist1_mixed;
@@ -98,6 +125,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
 
 } else if (condition_assignment == "pureproduce" && list_assignment =="List1" && experiment_assignment =="production_effect" && during_after_assignment == "during") {
   stimuli = studylist1_pureproduce;
+  stimuli_black = studylist1_pureproduce_black;
   stimuli_test = testlist1;
   front_buffer_list = frontbufferlist_pureproduce;
   end_buffer_list = endbufferlist_pureproduce;
@@ -342,6 +370,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
 
 } else if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && during_after_assignment == "after") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
   stimuli = studylist1_mixed;
+  //stimuli_black = studylist1_mixed_black;
   stimuli_test = testlist1;
   front_buffer_list = frontbufferlist_mixed;
   end_buffer_list = endbufferlist_mixed;
@@ -353,6 +382,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
 
 } else if (condition_assignment == "pureproduce" && list_assignment =="List1" && experiment_assignment =="production_effect" && during_after_assignment == "after") {
   stimuli = studylist1_pureproduce;
+  //stimuli_black = studylist1_pureproduce_black;
   stimuli_test = testlist1;
   front_buffer_list = frontbufferlist_pureproduce;
   end_buffer_list = endbufferlist_pureproduce;
@@ -363,6 +393,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
   study_procedure = study_procedure_after;
 } else if (condition_assignment == "pureread" && list_assignment == "List1" && experiment_assignment =="production_effect" && during_after_assignment == "after") {
   stimuli = studylist1_pureread;
+  //stimuli_black = studylist1_pureread_black;
   stimuli_test = testlist1;
   front_buffer_list = frontbufferlist_pureread;
   end_buffer_list = endbufferlist_pureread;
@@ -374,6 +405,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
 
 } else if (condition_assignment == "mixed" && list_assignment =="List2" && experiment_assignment =="production_effect" && during_after_assignment == "after") {
   stimuli = studylist2_mixed;
+ // stimuli_black = studylist2_mixed_black;
   stimuli_test = testlist2;
   front_buffer_list = frontbufferlist_mixed;
   end_buffer_list = endbufferlist_mixed;
@@ -384,6 +416,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
   study_procedure = study_procedure_after;
 } else if (condition_assignment == "pureproduce" && list_assignment =="List2" && experiment_assignment =="production_effect" && during_after_assignment == "after") {
   stimuli = studylist2_pureproduce;
+ // stimuli_black = studylist2_pureproduce_black;
   stimuli_test = testlist2;
   front_buffer_list = frontbufferlist_pureproduce;
   end_buffer_list = endbufferlist_pureproduce;  instruction_text = instruction_text_PE; 
@@ -393,6 +426,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
   study_procedure = study_procedure_after;
 } else if (condition_assignment == "pureread" && list_assignment =="List2" && experiment_assignment =="production_effect" && during_after_assignment == "after") {
   stimuli = studylist2_pureread;
+ // stimuli_black = studylist2_pureread_black;
   stimuli_test = testlist2;
   front_buffer_list = frontbufferlist_pureread;
   end_buffer_list = endbufferlist_pureread;
@@ -404,6 +438,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
 
 } else if (condition_assignment == "mixed" && list_assignment =="List3" && experiment_assignment =="production_effect" && during_after_assignment == "after") {
   stimuli = studylist3_mixed;
+  //stimuli_black = studylist3_mixed_black;
   stimuli_test = testlist3;
   front_buffer_list = frontbufferlist_mixed;
   end_buffer_list = endbufferlist_mixed;
@@ -414,6 +449,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
   study_procedure = study_procedure_after;
 } else if (condition_assignment == "pureproduce" && list_assignment =="List3" && experiment_assignment =="production_effect" && during_after_assignment == "after") {
   stimuli = studylist3_pureproduce;
+  //stimuli_black = studylist3_pureproduce_black;
   stimuli_test = testlist3;
   front_buffer_list = frontbufferlist_pureproduce;
   end_buffer_list = endbufferlist_pureproduce;
@@ -424,6 +460,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
   study_procedure = study_procedure_after;
 } else if (condition_assignment == "pureread" && list_assignment =="List3" && experiment_assignment =="production_effect" && during_after_assignment == "after") {
   stimuli = studylist3_pureread;
+ // stimuli_black = studylist3_pureread_black;
   stimuli_test = testlist3;
   front_buffer_list = frontbufferlist_pureread;
   end_buffer_list = endbufferlist_pureread;
@@ -435,6 +472,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
 
 } else if (condition_assignment == "mixed" && list_assignment =="List4" && experiment_assignment =="production_effect" && during_after_assignment == "after") {
   stimuli = studylist4_mixed;
+  //stimuli_black = studylist4_mixed_black;
   stimuli_test = testlist4;
   front_buffer_list = frontbufferlist_mixed;
   end_buffer_list = endbufferlist_mixed;
@@ -445,6 +483,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
   study_procedure = study_procedure_after;
 } else if (condition_assignment == "pureproduce" && list_assignment =="List4" && experiment_assignment =="production_effect" && during_after_assignment == "after") {
   stimuli = studylist4_pureproduce;
+ // stimuli_black = studylist4_pureproduce_black;
   stimuli_test = testlist4;
   front_buffer_list = frontbufferlist_pureproduce;
   end_buffer_list = endbufferlist_pureproduce;
@@ -455,6 +494,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
   study_procedure = study_procedure_after;
 } else if (condition_assignment == "pureread" && list_assignment =="List4" && experiment_assignment =="production_effect" && during_after_assignment == "after") {
   stimuli = studylist4_pureread;
+  //stimuli_black = studylist4_pureread_black;
   stimuli_test = testlist4;
   front_buffer_list = frontbufferlist_pureread;
   end_buffer_list = endbufferlist_pureread;
@@ -970,8 +1010,48 @@ var study_end_buffer = {
  /////                                Study Phase where cue to Produce/Remember or Read/Forget is presented AFTER item presentation                  //
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
- //Present the study words                           ////need to make files of black font and change timelineVaraible 'stimulus' to stimulus_black
-var study_phase_stimuli = {
+
+
+var after_study_procedure = {
+  timeline: [
+    {
+      type: 'survey-html-form',
+      button_label: 'Press enter to continue',
+      preamble: jsPsych.timelineVariable("stimulus_black"),
+      html: '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
+      post_trial_gap: 0,
+      trial_duration: 1000,
+      data: {phase: "instructions"},
+      autofocus: 'test-resp-box',
+    },
+
+    {
+      type: 'survey-html-form',
+      button_label: 'Press enter to continue',
+      preamble: jsPsych.timelineVariable("stimulus"),
+      html: '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
+      post_trial_gap: 500,
+      trial_duration: 3000,
+      data: {phase: "instructions"},
+      autofocus: 'test-resp-box',
+    },
+  ],
+  timeline_variables: studylist1_pureproduce,
+  //randomize_order: true,
+};
+
+
+/*var after_study_procedure = {
+  timeline: [after_study_procedure_block1, after_study_procedure_block2],
+  //randomize_order: true,
+}; */
+
+
+
+
+
+/*  //Present the study words                           ////need to make files of black font and change timelineVaraible 'stimulus' to stimulus_black
+ var study_phase_stimuli = {
             type: 'html-keyboard-response',
             stimulus: function(){
               var html = `
@@ -982,6 +1062,12 @@ var study_phase_stimuli = {
             choices: jsPsych.NO_KEYS,
             data: {phase:"study", data: jsPsych.timelineVariable("data")},
             trial_duration: 1000, // words will appear for 2 seconds
+            on_start: function (){
+              const wordElement = document.querySelector('p[style*="color: green;"]');
+              jsPsych.pluginAPI.setTimeout(function () {
+                wordElement.style.color = 'black';
+              }, 500);
+            },
             post_trial_gap: 0 // like a blank 500
 };
 
@@ -994,7 +1080,7 @@ var study_instructions123_after = {
   trial_duration: 3000,
   data: {phase: "instructions"},
   autofocus: 'test-resp-box',
-};
+}; */
 
 
 /* //Study Phase
@@ -1021,11 +1107,11 @@ randomize_order:true,
 }; */
 
 
- var study_procedure_after = {
+/*  var study_procedure_after = {
   timeline: [study_phase_stimuli, study_instructions123_after],
   timeline_variables: stimuli,
   randomize_order: true, // add data tag?
- };
+ }; */
 
 
 
@@ -1208,7 +1294,7 @@ timeline.push(study_front_buffer);
 if(during_after_assignment == "during") {
   timeline.push(study_procedure_during);
 } else {
-  timeline.push(study_procedure_after);
+  timeline.push(after_study_procedure);
 };
 
 //timeline.push(study_procedure); 
