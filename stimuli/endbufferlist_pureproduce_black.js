@@ -1,0 +1,4 @@
+endbufferlist_pureproduce = [
+{"stimulus":"<p style='font-size: 48px;'><span style='color: green'>MONTH</span></p>","data":{"type":"buffer_item","condition":"produce","category":"buffer_item","word":"MONTH"}, "stimulus_black":"<p style='font-size: 48px;'><span style='color: black'>MONTH</span></p>","data_black":{"type":"buffer_item","condition":"produce_black"}},
+{"stimulus":"<p style='font-size: 48px;'><span style='color: green'>SPOON</span></p>","data":{"type":"buffer_item","condition":"produce","category":"buffer_item","word":"SPOON"}, "stimulus_black":"<p style='font-size: 48px;'><span style='color: black'>SPOON</span></p>","data_black":{"type":"buffer_item","condition":"produce_black"}},
+]

@@ -20,9 +20,11 @@
         <script src="stimuli/practest.js"></script>
         <script src="stimuli/frontbufferlist_mixed.js"></script>
         <script src="stimuli/frontbufferlist_pureproduce.js"></script>
+        <script src="stimuli/frontbufferlist_pureproduce_black.js"></script>
         <script src="stimuli/frontbufferlist_pureread.js"></script>
         <script src="stimuli/endbufferlist_mixed.js"></script>
         <script src="stimuli/endbufferlist_pureproduce.js"></script>
+        <script src="stimuli/endbufferlist_pureproduce_black.js"></script>
         <script src="stimuli/endbufferlist_pureread.js"></script>
         <script src="stimuli/studylist1_mixed.js"></script>
         <script src="stimuli/studylist1_pureproduce.js"></script>
@@ -1010,7 +1012,36 @@ var study_end_buffer = {
  /////                                Study Phase where cue to Produce/Remember or Read/Forget is presented AFTER item presentation                  //
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//Study Phase - Front Buffer Items - for after procedure 
+var after_study_front_buffer = {
+  timeline:[
+    {
+    type: 'survey-html-form',
+    button_label: 'Press enter to continue',
+    preamble: jsPsych.timelineVariable("stimulus_black"),
+    html:  '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
+    post_trial_gap: 0, 
+    trial_duration: 1000, //change back to 3000
+    data: {phase:"study_buffer", data: jsPsych.timelineVariable("data_black")},
+    autofocus: 'test-resp-box',
+  },
 
+  {
+    type: 'survey-html-form',
+    button_label: 'Press enter to continue',
+    preamble: jsPsych.timelineVariable("stimulus"),
+    html:  '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
+    post_trial_gap: 500, 
+    trial_duration: 3000, //change back to 3000
+    data: {phase:"study_buffer", data: jsPsych.timelineVariable("data")},
+    autofocus: 'test-resp-box',
+  },
+],
+    timeline_variables: front_buffer_list,
+    randomize_order:true,
+};
+
+///////////////////////////////////////////
 
 var after_study_procedure = {
   timeline: [
@@ -1021,7 +1052,7 @@ var after_study_procedure = {
       html: '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
       post_trial_gap: 0,
       trial_duration: 1000,
-      data: {phase: "instructions"},
+      data: {phase:"study", data: jsPsych.timelineVariable("data_black")},
       autofocus: 'test-resp-box',
     },
 
@@ -1032,13 +1063,44 @@ var after_study_procedure = {
       html: '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
       post_trial_gap: 500,
       trial_duration: 3000,
-      data: {phase: "instructions"},
+      data: {phase:"study", data: jsPsych.timelineVariable("data")},
       autofocus: 'test-resp-box',
     },
   ],
   timeline_variables: studylist1_pureproduce,
-  //randomize_order: true,
+  randomize_order: true,
 };
+/////////////////////////////////////////////////
+
+//Study Phase - End Buffer Items // for afer procedure  
+var after_study_end_buffer = {
+  timeline:[
+    {
+    type: 'survey-html-form',
+    button_label: 'Press enter to continue',
+    preamble: jsPsych.timelineVariable("stimulus_black"),
+    html:  '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
+    post_trial_gap: 0, 
+    trial_duration: 1000, //change back to 3000
+    data: {phase:"study_buffer", data: jsPsych.timelineVariable("data_black")},
+    autofocus: 'test-resp-box',
+  },
+
+  {
+    type: 'survey-html-form',
+    button_label: 'Press enter to continue',
+    preamble: jsPsych.timelineVariable("stimulus"),
+    html:  '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
+    post_trial_gap: 500, 
+    trial_duration: 3000, //change back to 3000
+    data: {phase:"study_buffer", data: jsPsych.timelineVariable("data")},
+    autofocus: 'test-resp-box',
+  },
+],
+    timeline_variables: end_buffer_list,
+    randomize_order:true,
+};
+
 
 
 /*var after_study_procedure = {
@@ -1050,68 +1112,6 @@ var after_study_procedure = {
 
 
 
-/*  //Present the study words                           ////need to make files of black font and change timelineVaraible 'stimulus' to stimulus_black
- var study_phase_stimuli = {
-            type: 'html-keyboard-response',
-            stimulus: function(){
-              var html = `
-                <p style='font-size: 48px; style=color:black;/>${jsPsych.timelineVariable('stimulus')}</p>
-              `
-              return html;
-            },
-            choices: jsPsych.NO_KEYS,
-            data: {phase:"study", data: jsPsych.timelineVariable("data")},
-            trial_duration: 1000, // words will appear for 2 seconds
-            on_start: function (){
-              const wordElement = document.querySelector('p[style*="color: green;"]');
-              jsPsych.pluginAPI.setTimeout(function () {
-                wordElement.style.color = 'black';
-              }, 500);
-            },
-            post_trial_gap: 0 // like a blank 500
-};
-
-var study_instructions123_after = {
-  type: 'survey-html-form',
-  button_label: 'Press enter to continue',
-  preamble: jsPsych.timelineVariable("stimulus"),
-  html: '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
-  post_trial_gap: 500,
-  trial_duration: 3000,
-  data: {phase: "instructions"},
-  autofocus: 'test-resp-box',
-}; */
-
-
-/* //Study Phase
-var study_instructions123_after = {
-  timeline: [
-    {
-    type: 'survey-html-form',
-    button_label: 'Press enter to continue',
-    preamble: function(){
-        var html = `
-          <p style='font-size: 48px;'>${jsPsych.timelineVariable('stimulus')}</p> 
-          `
-        return html;
-    },
-    html:  '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
-    post_trial_gap: 500, 
-    trial_duration: 3000, //change back to 3000
-    data: {phase:"study", data: jsPsych.timelineVariable("data")},
-    autofocus: 'test-resp-box',
-  }
-],
-timeline_variables: stimuli,
-randomize_order:true,
-}; */
-
-
-/*  var study_procedure_after = {
-  timeline: [study_phase_stimuli, study_instructions123_after],
-  timeline_variables: stimuli,
-  randomize_order: true, // add data tag?
- }; */
 
 
 
@@ -1289,7 +1289,13 @@ timeline.push(instructions);
 //timeline.push(practice_test_instructions);
 //timeline.push(practice_test_procedure);
 //timeline.push(practice_test_instructions_post);
-timeline.push(study_front_buffer);
+//timeline.push(study_front_buffer);
+
+if(during_after_assignment == "during") {
+  timeline.push(study_front_buffer);
+} else {
+  timeline.push(after_study_front_buffer);
+};
 
 if(during_after_assignment == "during") {
   timeline.push(study_procedure_during);
@@ -1298,7 +1304,14 @@ if(during_after_assignment == "during") {
 };
 
 //timeline.push(study_procedure); 
-timeline.push(study_end_buffer);
+//timeline.push(study_end_buffer);
+
+if(during_after_assignment == "during") {
+  timeline.push(study_end_buffer);
+} else {
+  timeline.push(after_study_end_buffer);
+};
+
 timeline.push(test_instructions);
 timeline.push(test_phase);
 timeline.push(survey);

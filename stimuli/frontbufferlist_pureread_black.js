@@ -1,0 +1,4 @@
+frontbufferlist_pureread = [
+{"stimulus":"<p style='font-size: 48px;'><span style='color: red'>NOUN</span></p>","data":{"type":"buffer_item","condition":"read","category":"buffer_item","word":"NOUN"}, "stimulus_black":"<p style='font-size: 48px;'><span style='color: black'>NOUN</span></p>","data_black":{"type":"buffer_item","condition":"read"}},
+{"stimulus":"<p style='font-size: 48px;'><span style='color: red'>HAND</span></p>","data":{"type":"buffer_item","condition":"read","category":"buffer_item","word":"HAND"}, "stimulus_black":"<p style='font-size: 48px;'><span style='color: black'>HAND</span></p>","data_black":{"type":"buffer_item","condition":"read"}},
+]
