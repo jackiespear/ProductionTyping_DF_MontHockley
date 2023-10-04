@@ -17,28 +17,44 @@
         <script src="jspsych-6.3.1/plugins/jspsych-fullscreen.js"></script>
         <script src="stimuli/exp_text.js"></script>
         <script src="stimuli/pracstudy.js"></script>
+        <script src="stimuli/pracstudy_black.js"></script>
         <script src="stimuli/practest.js"></script>
         <script src="stimuli/frontbufferlist_mixed.js"></script>
+        <script src="stimuli/frontbufferlist_mixed_black.js"></script>
         <script src="stimuli/frontbufferlist_pureproduce.js"></script>
         <script src="stimuli/frontbufferlist_pureproduce_black.js"></script>
         <script src="stimuli/frontbufferlist_pureread.js"></script>
+        <script src="stimuli/frontbufferlist_pureread_black.js"></script>
         <script src="stimuli/endbufferlist_mixed.js"></script>
+        <script src="stimuli/endbufferlist_mixed_black.js"></script>
         <script src="stimuli/endbufferlist_pureproduce.js"></script>
         <script src="stimuli/endbufferlist_pureproduce_black.js"></script>
         <script src="stimuli/endbufferlist_pureread.js"></script>
+        <script src="stimuli/endbufferlist_pureread_black.js"></script>
         <script src="stimuli/studylist1_mixed.js"></script>
+        <script src="stimuli/studylist1_mixed_black.js"></script>
         <script src="stimuli/studylist1_pureproduce.js"></script>
         <script src="stimuli/studylist1_pureproduce_black.js"></script>
         <script src="stimuli/studylist1_pureread.js"></script>
+        <script src="stimuli/studylist1_pureread_black.js"></script>
         <script src="stimuli/studylist2_mixed.js"></script>
+        <script src="stimuli/studylist2_mixed_black.js"></script>
         <script src="stimuli/studylist2_pureproduce.js"></script>
+        <script src="stimuli/studylist2_pureproduce_black.js"></script>
         <script src="stimuli/studylist2_pureread.js"></script>
+        <script src="stimuli/studylist2_pureread_black.js"></script>
         <script src="stimuli/studylist3_mixed.js"></script>
+        <script src="stimuli/studylist3_mixed_black.js"></script>
         <script src="stimuli/studylist3_pureproduce.js"></script>
+        <script src="stimuli/studylist3_pureproduce_black.js"></script>
         <script src="stimuli/studylist3_pureread.js"></script>
+        <script src="stimuli/studylist3_pureread_black.js"></script>
         <script src="stimuli/studylist4_mixed.js"></script>
+        <script src="stimuli/studylist4_mixed_black.js"></script>
         <script src="stimuli/studylist4_pureproduce.js"></script>
+        <script src="stimuli/studylist4_pureproduce_black.js"></script>
         <script src="stimuli/studylist4_pureread.js"></script>
+        <script src="stimuli/studylist4_pureread_black.js"></script>
         <script src="stimuli/testlist1.js"></script>
         <script src="stimuli/testlist2.js"></script>
         <script src="stimuli/testlist3.js"></script>
@@ -62,12 +78,12 @@ jsPsych.data.addProperties({
   cue_presentation: during_after_assignment
 });
 
-var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(['pureproduce', 'pureread'], 1)[0];
+var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(['pureproduce', 'pureread', 'mixed'], 1)[0];
 jsPsych.data.addProperties({
   condition: condition_assignment
 });
 
-var list_assignment = jsPsych.randomization.sampleWithoutReplacement(['List1'], 1)[0];
+var list_assignment = jsPsych.randomization.sampleWithoutReplacement(['List1', 'List2', 'List3', 'List4'], 1)[0];
 jsPsych.data.addProperties({
   list: list_assignment
 });
@@ -127,7 +143,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
 
 } else if (condition_assignment == "pureproduce" && list_assignment =="List1" && experiment_assignment =="production_effect" && during_after_assignment == "during") {
   stimuli = studylist1_pureproduce;
-  stimuli_black = studylist1_pureproduce_black;
+  stimuli_black = studylist1_pureproduce;
   stimuli_test = testlist1;
   front_buffer_list = frontbufferlist_pureproduce;
   end_buffer_list = endbufferlist_pureproduce;
@@ -965,8 +981,8 @@ var study_instructions123 = {
         return html;
     },
     html:  '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
-    post_trial_gap: 100, 
-    trial_duration: 100, //change back to 3000
+    post_trial_gap: 500, 
+    trial_duration: 3000, //change back to 3000
     data: {phase:"study", data: jsPsych.timelineVariable("data")},
     autofocus: 'test-resp-box',
   }
@@ -1041,9 +1057,9 @@ var after_study_front_buffer = {
     randomize_order:true,
 };
 
-///////////////////////////////////////////
+/////////////////////////////////////////// after_study_procedure changed to --- study_procedure_after 
 
-var after_study_procedure = {
+var study_procedure_after = {
   timeline: [
     {
       type: 'survey-html-form',
@@ -1067,7 +1083,7 @@ var after_study_procedure = {
       autofocus: 'test-resp-box',
     },
   ],
-  timeline_variables: studylist1_pureproduce,
+  timeline_variables: stimuli,
   randomize_order: true,
 };
 /////////////////////////////////////////////////
@@ -1300,7 +1316,7 @@ if(during_after_assignment == "during") {
 if(during_after_assignment == "during") {
   timeline.push(study_procedure_during);
 } else {
-  timeline.push(after_study_procedure);
+  timeline.push(study_procedure_after);
 };
 
 //timeline.push(study_procedure); 
