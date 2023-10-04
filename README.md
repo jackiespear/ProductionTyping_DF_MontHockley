@@ -7,8 +7,8 @@ Participants are randomly assigned to do a production effect or direceted forget
 
 Between-subjects conditions:
 
-Procedure: production effect or directed forgetting <br><br>
-Study list type: mixed, pure-produce/remember, pure-read/forget <br><br>
+Procedure: production effect or directed forgetting <br>
+Study list type: mixed, pure-produce/remember, pure-read/forget <br>
 Cue presentation: during or after <br><br>
 
 On trials where participants are instructed to produce/remember, words will be presented in green. On trails where participants are instructed to read/forget, words will be presented in red. Production is accomplished by typing, and typing is recorded, but not mirrored to the screen. When the cue to produce/remember or read/forget is presented during stimulus presentation, each word is presented colored font for 3 seconds, after which the screen is cleared for 500ms. When the cue to produce/remember or read/forget is presented after stimulus presentation, each word is presnted in black font for 1 second, colored font for 3 seconds, and then the screen is cleared for 500ms.
