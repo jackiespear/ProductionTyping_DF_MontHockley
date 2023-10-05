@@ -981,8 +981,8 @@ var study_instructions123 = {
         return html;
     },
     html:  '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
-    post_trial_gap: 500, 
-    trial_duration: 3000, //change back to 3000
+    post_trial_gap: 50, 
+    trial_duration: 100, //change back to 3000
     data: {phase:"study", data: jsPsych.timelineVariable("data")},
     autofocus: 'test-resp-box',
   }
@@ -1037,7 +1037,7 @@ var after_study_front_buffer = {
     preamble: jsPsych.timelineVariable("stimulus_black"),
     html:  '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
     post_trial_gap: 0, 
-    trial_duration: 1000, //change back to 3000
+    trial_duration: 1000, //change back to 1000
     data: {phase:"study_buffer", data: jsPsych.timelineVariable("data_black")},
     autofocus: 'test-resp-box',
   },
@@ -1067,7 +1067,7 @@ var study_procedure_after = {
       preamble: jsPsych.timelineVariable("stimulus_black"),
       html: '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
       post_trial_gap: 0,
-      trial_duration: 1000,
+      trial_duration: 100,
       data: {phase:"study", data: jsPsych.timelineVariable("data_black")},
       autofocus: 'test-resp-box',
     },
@@ -1078,7 +1078,7 @@ var study_procedure_after = {
       preamble: jsPsych.timelineVariable("stimulus"),
       html: '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
       post_trial_gap: 500,
-      trial_duration: 3000,
+      trial_duration: 300,
       data: {phase:"study", data: jsPsych.timelineVariable("data")},
       autofocus: 'test-resp-box',
     },
@@ -1338,7 +1338,7 @@ timeline.push(debrief);
 jsPsych.init({
     timeline: timeline,
     on_finish: function() {
-     window.location.href = "https://umanitobapsych.sona-systems.com/webstudy_credit.aspx?experiment_id=1562&credit_token=26a8ab31eea847cdbd7079fef3572e01&survey_code="+SONA_ID; //changed
+     //window.location.href = "https://umanitobapsych.sona-systems.com/webstudy_credit.aspx?experiment_id=1562&credit_token=26a8ab31eea847cdbd7079fef3572e01&survey_code="+SONA_ID; //changed
       // display data at end:
       jsPsych.data.displayData(); //commented out for final version
     }
