@@ -105,30 +105,6 @@ var post_practice_text2 = [];
 var test_instruction_text = [];
 var study_procedure = []; //cue to produce/read, remember/forget is either during stimuli presentation or after
 
-//change font color to black for the 'after' condition
-/* studylist1_mixed_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black');
-studylist1_mixed_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
-studylist2_mixed_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black');
-studylist2_mixed_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
-studylist3_mixed_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black');
-studylist3_mixed_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
-studylist4_mixed_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black');
-studylist4_mixed_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
-
-studylist1_pureproduce_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
-studylist2_pureproduce_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
-studylist3_pureproduce_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
-studylist4_pureproduce_black = JSON.stringify(studylist1_mixed).replace(/green/g, 'black');
-
-studylist1_pureread_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black');
-studylist2_pureread_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black');
-studylist3_pureread_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black');
-studylist4_pureread_black = JSON.stringify(studylist1_mixed).replace(/red/g, 'black'); */
-
-//console.log(studylist1_pureproduce_black);
-//console.table(studylist1_pureproduce_black);
-
-
 
 if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && during_after_assignment == "during") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
   stimuli = studylist1_mixed;
@@ -845,7 +821,7 @@ var instructions = {
   },
 };
 
-//Present the instruction to produce or read during PRACTICE phase
+//Present the instruction to produce or read during PRACTICE phase - 'during' practice study phase
 var study_practice = {
   timeline: [
     {
@@ -869,7 +845,7 @@ randomize_order: true,
 timeline_variables: pracstudy,
 };
 
-
+// 'after' practice study phase 
 var after_study_practice = {
   timeline:[
     {
@@ -1153,22 +1129,6 @@ var after_study_end_buffer = {
 
 
 
-/*var after_study_procedure = {
-  timeline: [after_study_procedure_block1, after_study_procedure_block2],
-  //randomize_order: true,
-}; */
-
-
-
-
-
-
-
-
-
-
-
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  //test phase instructions presented after study phase is over
@@ -1329,9 +1289,9 @@ var no_consent = {
 
 /*set up experiment structure*/
 var timeline = [];
-//timeline.push(consent);
-//timeline.push(no_consent);
-//timeline.push(welcome);
+timeline.push(consent);
+timeline.push(no_consent);
+timeline.push(welcome);
 timeline.push(enter_full_screen);
 timeline.push(instructions);
 timeline.push(practice_test_instructions_pre);
@@ -1342,12 +1302,9 @@ if(during_after_assignment == "during") {
   timeline.push(after_study_practice);
 };
 
-//timeline.push(study_practice);
-
 timeline.push(practice_test_instructions);
 timeline.push(practice_test_procedure);
 timeline.push(practice_test_instructions_post);
-//timeline.push(study_front_buffer); do not uncomment 
 
 if(during_after_assignment == "during") {
   timeline.push(study_front_buffer);
@@ -1360,9 +1317,6 @@ if(during_after_assignment == "during") {
 } else {
   timeline.push(study_procedure_after);
 };
-
-//timeline.push(study_procedure); 
-//timeline.push(study_end_buffer);
 
 if(during_after_assignment == "during") {
   timeline.push(study_end_buffer);
@@ -1380,9 +1334,9 @@ timeline.push(debrief);
 jsPsych.init({
     timeline: timeline,
     on_finish: function() {
-     //window.location.href = "https://umanitobapsych.sona-systems.com/webstudy_credit.aspx?experiment_id=1562&credit_token=26a8ab31eea847cdbd7079fef3572e01&survey_code="+SONA_ID; //changed
+     window.location.href = "https://umanitobapsych.sona-systems.com/webstudy_credit.aspx?experiment_id=1562&credit_token=26a8ab31eea847cdbd7079fef3572e01&survey_code="+SONA_ID; //changed
       // display data at end:
-      jsPsych.data.displayData(); //commented out for final version
+      //jsPsych.data.displayData(); //commented out for final version
     }
 });
 
