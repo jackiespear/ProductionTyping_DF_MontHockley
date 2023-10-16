@@ -845,6 +845,41 @@ randomize_order: true,
 timeline_variables: pracstudy,
 };
 
+// feedback on typing
+var typing_feedback = {
+  type: 'html-keyboard-response',
+  stimulus: function(){
+    // The feedback stimulus is a dynamic parameter because we can't know in advance whether
+    // the stimulus should be 'correct' or 'incorrect'.
+    // Instead, this function will check the accuracy of the last response and use that information to set
+    // the stimulus value on each trial.
+    var last_trial_typed = jsPsych.data.get().last(1).values()[0].response.response;
+    var last_trial_presented = jsPsych.data.get().last(1).values()[0].type.word;
+    var last_trial_condition = jsPsych.data.get().last(1).values()[0].type.condition;
+    var last_trial_experiment = jsPsych.data.get().last(1).values()[0].experiment;
+
+
+    if(last_trial_typed == last_trial_presented && last_trial_condition == "produce" && last_trial_experiment == "production_effect"){
+      return "<p><span style='color:green;font-size:30px;'>Good job! You typed correctly!</span></p>"; // the parameter value has to be returned from the function
+    } else if  (last_trial_experiment == "production_effect" && last_trial_condition == "read" && last_trial_typed == "") {
+      return "<p><span style='color:green;font-size:30px;'>Correct!</span></p>";
+    } else if (last_trial_experiment == "production_effect" && last_trial_condition == "read" && last_trial_typed != "") {
+      return "<p><span style='color:red;font-size:30px;'>Incorrect. Please do not type.</span></p>";
+    } else if (last_trial_experiment == "production_effect" && last_trial_condition == "produce" && last_trial_typed != last_trial_presented)
+      return "<p><span style='color:red;font-size:30px;'>Incorrect. You must type the exact word.</span></p>"; // the parameter value has to be returned from the function
+    }
+  },
+  choices:jsPsych.NO_KEYS,
+  trial_duration:1000,
+};
+
+var practice_study_procedure = {
+  timeline: [study_practice, typing_feedback],
+  randomize_order: true,
+  timeline_variables: pracstudy,
+};
+
+
 // 'after' practice study phase 
 var after_study_practice = {
   timeline:[
@@ -1297,7 +1332,7 @@ timeline.push(instructions);
 timeline.push(practice_test_instructions_pre);
 
 if(during_after_assignment == "during") {
-  timeline.push(study_practice);
+  timeline.push(practice_study_procedure);
 } else {
   timeline.push(after_study_practice);
 };
