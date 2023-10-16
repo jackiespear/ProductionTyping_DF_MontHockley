@@ -864,7 +864,7 @@ var typing_feedback = {
       return "<p><span style='color:green;font-size:30px;'>Correct!</span></p>";
     } else if (last_trial_experiment == "production_effect" && last_trial_condition == "read" && last_trial_typed != "") {
       return "<p><span style='color:red;font-size:30px;'>Incorrect. Please do not type.</span></p>";
-    } else if (last_trial_experiment == "production_effect" && last_trial_condition == "produce" && last_trial_typed != last_trial_presented);
+    } else if (last_trial_experiment == "production_effect" && last_trial_condition == "produce" && last_trial_typed != last_trial_presented); {
       return "<p><span style='color:red;font-size:30px;'>Incorrect. You must type the exact word.</span></p>"; // the parameter value has to be returned from the function
     }
   },
