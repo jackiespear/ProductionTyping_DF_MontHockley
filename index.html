@@ -823,8 +823,6 @@ var instructions = {
 
 //Present the instruction to produce or read during PRACTICE phase - 'during' practice study phase
 var study_practice = {
-  //timeline: [
-    //{
     type: 'survey-html-form',
     button_label: 'Press enter to continue',
     preamble: function(){
@@ -838,11 +836,6 @@ var study_practice = {
     trial_duration: 3000,
     data: {phase:"practice", type: jsPsych.timelineVariable('data')},
     autofocus: 'test-resp-box',
-    
- // }
-//],
-//randomize_order: true,
-//timeline_variables: pracstudy,
 };
 
 // feedback on typing
@@ -854,7 +847,10 @@ var typing_feedback = {
     // Instead, this function will check the accuracy of the last response and use that information to set
     // the stimulus value on each trial.
     var last_trial_typed = jsPsych.data.get().last(1).values()[0].response.response;
+    var last_trial_typed = last_trial_typed.toLowerCase();
     var last_trial_presented = jsPsych.data.get().last(1).values()[0].type.word;
+    var last_trial_presented = last_trial_presented.toLowerCase();
+    var last_trial_presented = 
     var last_trial_condition = jsPsych.data.get().last(1).values()[0].type.condition;
     var last_trial_experiment = jsPsych.data.get().last(1).values()[0].experiment;
 
