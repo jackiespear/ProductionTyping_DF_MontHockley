@@ -861,6 +861,8 @@ var typing_feedback = {
       return "<p><span style='color:red;font-size:30px;'>Incorrect. Please do not type.</span></p>";
     } else if (last_trial_experiment == "production_effect" && last_trial_condition == "produce" && last_trial_typed != last_trial_presented) {
       return "<p><span style='color:red;font-size:30px;'>Incorrect. You must type the exact word.</span></p>"; // the parameter value has to be returned from the function
+    } else if (last_trial_experiment == "directed_forgetting") {
+      return "<p><span style='color:white;font-size:1px;'>.</span></p>";
     }
   },
   choices:jsPsych.NO_KEYS,
@@ -902,6 +904,13 @@ var after_study_practice = {
     timeline_variables: pracstudy,
     randomize_order:true,
 };
+
+
+
+
+
+
+
 
 
 
