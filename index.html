@@ -909,7 +909,7 @@ var after_typing_feedback = {
     // the stimulus value on each trial.
     var last_trial_typed1 = jsPsych.data.get().last(1).values()[0].response.response;
     var last_trial_typed = last_trial_typed1.toLowerCase();
-    var last_trial_presented1 = jsPsych.data.get().last(1).values()[0].type.word;
+    var last_trial_presented1 = jsPsych.data.get().last(1).values()[0].word;
     var last_trial_presented = last_trial_presented1.toLowerCase();
     var last_trial_condition = jsPsych.data.get().last(1).values()[0].type.condition;
     var last_trial_experiment = jsPsych.data.get().last(1).values()[0].experiment;
