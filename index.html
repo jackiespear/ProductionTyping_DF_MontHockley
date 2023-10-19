@@ -907,22 +907,22 @@ var after_typing_feedback = {
     // the stimulus should be 'correct' or 'incorrect'.
     // Instead, this function will check the accuracy of the last response and use that information to set
     // the stimulus value on each trial.
-    var last_trial_typed1 = jsPsych.data.get().last(1).values()[0].response.response;
-    var last_trial_typed = last_trial_typed1.toLowerCase();
-    var last_trial_presented1 = jsPsych.data.get().last(1).values()[0].word;
-    var last_trial_presented = last_trial_presented1.toLowerCase();
-    var last_trial_condition = jsPsych.data.get().last(1).values()[0].type.condition;
-    var last_trial_experiment = jsPsych.data.get().last(1).values()[0].experiment;
+    var last_trial_typed1_after = jsPsych.data.get().last(1).values()[0].response.response;
+    var last_trial_typed_after = last_trial_typed1_after.toLowerCase();
+    var last_trial_presented1_after = jsPsych.data.get().last(1).values()[0].type.word;
+    var last_trial_presented_after = last_trial_presented1_after.toLowerCase();
+    var last_trial_condition_after = jsPsych.data.get().last(1).values()[0].type.condition;
+    var last_trial_experiment_after = jsPsych.data.get().last(1).values()[0].experiment;
 
-    if(last_trial_typed == last_trial_presented && last_trial_condition == "produce" && last_trial_experiment == "production_effect") {
+    if(last_trial_typed_after == last_trial_presented_after && last_trial_condition_after == "produce" && last_trial_experiment_after == "production_effect") {
       return "<p><span style='color:green;font-size:30px;'>Correct! You typed correctly!</span></p>"; // the parameter value has to be returned from the function
-    } else if  (last_trial_experiment == "production_effect" && last_trial_condition == "read" && last_trial_typed == "") {
+    } else if  (last_trial_experiment_after == "production_effect" && last_trial_condition_after == "read" && last_trial_typed_after == "") {
       return "<p><span style='color:green;font-size:30px;'>Correct! Thank you for reading! </span></p>";
-    } else if (last_trial_experiment == "production_effect" && last_trial_condition == "read" && last_trial_typed != "") {
+    } else if (last_trial_experiment_after == "production_effect" && last_trial_condition_after == "read" && last_trial_typed_after != "") {
       return "<p><span style='color:red;font-size:30px;'>Incorrect. Please do not type.</span></p>";
-    } else if (last_trial_experiment == "production_effect" && last_trial_condition == "produce" && last_trial_typed != last_trial_presented) {
+    } else if (last_trial_experiment_after_after == "production_effect" && last_trial_condition_after == "produce" && last_trial_typed_after != last_trial_presented_after) {
       return "<p><span style='color:red;font-size:30px;'>Incorrect. You must type the exact word.</span></p>"; // the parameter value has to be returned from the function
-    } else if (last_trial_experiment == "directed_forgetting") {
+    } else if (last_trial_experiment_after == "directed_forgetting") {
       return "<p><span style='color:white;font-size:1px;'>.</span></p>";
     }
   },
