@@ -920,7 +920,7 @@ var after_typing_feedback = {
       return "<p><span style='color:green;font-size:30px;'>Correct! Thank you for reading! </span></p>";
     } else if (last_trial_experiment_after == "production_effect" && last_trial_condition_after == "read" && last_trial_typed_after != "") {
       return "<p><span style='color:red;font-size:30px;'>Incorrect. Please do not type.</span></p>";
-    } else if (last_trial_experiment_after_after == "production_effect" && last_trial_condition_after == "produce" && last_trial_typed_after != last_trial_presented_after) {
+    } else if (last_trial_experiment_after == "production_effect" && last_trial_condition_after == "produce" && last_trial_typed_after != last_trial_presented_after) {
       return "<p><span style='color:red;font-size:30px;'>Incorrect. You must type the exact word.</span></p>"; // the parameter value has to be returned from the function
     } else if (last_trial_experiment_after == "directed_forgetting") {
       return "<p><span style='color:white;font-size:1px;'>.</span></p>";
