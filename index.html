@@ -878,8 +878,6 @@ var practice_study_procedure = {
 
 // 'after' practice study phase 
 var after_study_practice = {
-  timeline:[
-    {
     type: 'survey-html-form',
     button_label: 'Press enter to continue',
     preamble: jsPsych.timelineVariable("stimulus_black"),
@@ -888,9 +886,9 @@ var after_study_practice = {
     trial_duration: 1000, //change back to 1000
     data: {phase:"study_buffer", data: jsPsych.timelineVariable("data_black")},
     autofocus: 'test-resp-box',
-  },
+  };
 
-  {
+  var after_study_practice2 = {
     type: 'survey-html-form',
     button_label: 'Press enter to continue',
     preamble: jsPsych.timelineVariable("stimulus"),
@@ -899,43 +897,8 @@ var after_study_practice = {
     trial_duration: 3000, //change back to 3000
     data: {phase:"study_buffer", data: jsPsych.timelineVariable("data")},
     autofocus: 'test-resp-box',
-  },
+  };
   
-  {
-    type: 'html-keyboard-response',
-    stimulus: function(){
-    // The feedback stimulus is a dynamic parameter because we can't know in advance whether
-    // the stimulus should be 'correct' or 'incorrect'.
-    // Instead, this function will check the accuracy of the last response and use that information to set
-    // the stimulus value on each trial.
-    var last_trial_typed1 = jsPsych.data.get().last(2).values()[1].response.response;
-    var last_trial_typed = last_trial_typed1.toLowerCase();
-    var last_trial_presented1 = jsPsych.data.get().last(2).values()[1].type.word;
-    var last_trial_presented = last_trial_presented1.toLowerCase();
-    var last_trial_condition = jsPsych.data.get().last(2).values()[1].type.condition;
-    var last_trial_experiment = jsPsych.data.get().last(2).values()[1].experiment;
-
-    if(last_trial_typed == last_trial_presented && last_trial_condition == "produce" && last_trial_experiment == "production_effect") {
-      return "<p><span style='color:green;font-size:30px;'>Correct! You typed correctly!</span></p>"; // the parameter value has to be returned from the function
-    } else if  (last_trial_experiment == "production_effect" && last_trial_condition == "read" && last_trial_typed == "") {
-      return "<p><span style='color:green;font-size:30px;'>Correct! Thank you for reading! </span></p>";
-    } else if (last_trial_experiment == "production_effect" && last_trial_condition == "read" && last_trial_typed != "") {
-      return "<p><span style='color:red;font-size:30px;'>Incorrect. Please do not type.</span></p>";
-    } else if (last_trial_experiment == "production_effect" && last_trial_condition == "produce" && last_trial_typed != last_trial_presented) {
-      return "<p><span style='color:red;font-size:30px;'>Incorrect. You must type the exact word.</span></p>"; // the parameter value has to be returned from the function
-    } else if (last_trial_experiment == "directed_forgetting") {
-      return "<p><span style='color:white;font-size:1px;'>.</span></p>";
-    }
-  },
-  choices:jsPsych.NO_KEYS,
-  trial_duration:1000,
-  }
-
-],
-    timeline_variables: pracstudy,
-    randomize_order:true,
-};
-
 // feedback on typing
 var after_typing_feedback = {
   type: 'html-keyboard-response',
@@ -968,7 +931,7 @@ var after_typing_feedback = {
 };
 
 var practice_study_procedure_after = {
-  timeline: [after_study_practice, after_typing_feedback],
+  timeline: [after_study_practice, after_study_practice2, after_typing_feedback],
   randomize_order: true,
   timeline_variables: pracstudy,
 };
@@ -1416,7 +1379,7 @@ timeline.push(practice_test_instructions_pre);
 if(during_after_assignment == "during") {
   timeline.push(practice_study_procedure);
 } else {
-  timeline.push(after_study_practice);
+  timeline.push(practice_study_procedure_after);
 };
 
 timeline.push(practice_test_instructions);
