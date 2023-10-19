@@ -907,12 +907,12 @@ var after_typing_feedback = {
     // the stimulus should be 'correct' or 'incorrect'.
     // Instead, this function will check the accuracy of the last response and use that information to set
     // the stimulus value on each trial.
-    var last_trial_typed1 = jsPsych.data.get().last(2).values()[1].response.response;
+    var last_trial_typed1 = jsPsych.data.get().last(2).values()[0].response.response;
     var last_trial_typed = last_trial_typed1.toLowerCase();
-    var last_trial_presented1 = jsPsych.data.get().last(2).values()[1].type.word;
+    var last_trial_presented1 = jsPsych.data.get().last(2).values()[0].type.word;
     var last_trial_presented = last_trial_presented1.toLowerCase();
-    var last_trial_condition = jsPsych.data.get().last(2).values()[1].type.condition;
-    var last_trial_experiment = jsPsych.data.get().last(2).values()[1].experiment;
+    var last_trial_condition = jsPsych.data.get().last(2).values()[0].type.condition;
+    var last_trial_experiment = jsPsych.data.get().last(2).values()[0].experiment;
 
     if(last_trial_typed == last_trial_presented && last_trial_condition == "produce" && last_trial_experiment == "production_effect") {
       return "<p><span style='color:green;font-size:30px;'>Correct! You typed correctly!</span></p>"; // the parameter value has to be returned from the function
