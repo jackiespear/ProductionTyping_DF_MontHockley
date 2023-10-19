@@ -1255,6 +1255,17 @@ var question_trial_english = {
     }
 };
 
+var question_trial_distraction = {
+  type: 'survey-html-form-orig',
+  button_label: 'Click here to continue',
+  trial_duration: 3000,
+  preamble: '<p>Were you doing anything else during the experiment? (e.g. watching TV)<br>(If yes please indicate)</p>',
+  html: '<p><input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box2" name="age" size="10" style=color:black;/></p>',
+  autofocus: 'test-resp-box2',
+  data: {type_dem: 'age'},
+};
+
+
 var survey = {
   data: {"phase": "Demographics"},
   timeline: [
@@ -1262,6 +1273,7 @@ var survey = {
     question_trial_gender,
     question_trial_age,
     question_trial_english,
+    question_trial_distraction,
   ]
 };
 
