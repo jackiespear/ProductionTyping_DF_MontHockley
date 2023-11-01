@@ -1366,33 +1366,41 @@ timeline.push(enter_full_screen);
 timeline.push(instructions);
 timeline.push(practice_test_instructions_pre);
 
-if(during_after_assignment == "during") {
+/*if(during_after_assignment == "during") { // this was commented out for only after condition 
   timeline.push(practice_study_procedure);
 } else {
   timeline.push(practice_study_procedure_after);
-};
+}; */
+
+timeline.push(practice_study_procedure_after); // this is added for only after condition
 
 timeline.push(practice_test_instructions);
 timeline.push(practice_test_procedure);
 timeline.push(practice_test_instructions_post);
 
-if(during_after_assignment == "during") {
+/*if(during_after_assignment == "during") {  //this was commented out for only after condition
   timeline.push(study_front_buffer);
 } else {
   timeline.push(after_study_front_buffer);
-};
+}; */
 
- if(during_after_assignment == "during") {
+timeline.push(after_study_front_buffer); // this is added for only after condition
+
+ /*if(during_after_assignment == "during") { //this was commented out for only after condition
   timeline.push(study_procedure_during);
 } else {
   timeline.push(study_procedure_after);
-}; 
+}; */
 
- if(during_after_assignment == "during") {
+timeline.push(study_procedure_after); // this is added for only after condition
+
+ /*if(during_after_assignment == "during") { //this was commented out for only after condition
   timeline.push(study_end_buffer);
 } else {
-  timeline.push(after_study_end_buffer);
-}; 
+  timeline.push(after_study_end_buffer); 
+}; */
+
+timeline.push(after_study_end_buffer); // this is added for only after condition
 
 timeline.push(test_instructions);
 timeline.push(test_phase);
