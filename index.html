@@ -73,7 +73,7 @@ jsPsych.data.addProperties({
   experiment: experiment_assignment
 });
 
-var during_after_assignment = jsPsych.randomization.sampleWithoutReplacement(['during', 'after'], 1)[0];
+var during_after_assignment = jsPsych.randomization.sampleWithoutReplacement(['after', 'after'], 1)[0]; //changed to be only after
 jsPsych.data.addProperties({
   cue_presentation: during_after_assignment
 });
@@ -358,11 +358,12 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
   post_practice_text2 = post_practice_text2_DF;
   test_instruction_text = test_instruction_text_DF;
   study_procedure = study_procedure_during;
+};
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////                                 Cue presentation AFTER randomization               //////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-} else if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && during_after_assignment == "after") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
+/*} else if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && during_after_assignment == "after") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
   stimuli = studylist1_mixed;
   //stimuli_black = studylist1_mixed_black;
   stimuli_test = testlist1;
@@ -624,7 +625,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
   post_practice_text2 = post_practice_text2_DF;
   test_instruction_text = test_instruction_text_DF;
   study_procedure = study_procedure_after;
-};
+}; */
 
 
 //console.table(stimuli);
