@@ -108,7 +108,7 @@ var test_instruction_text = [];
 var study_procedure = []; //cue to produce/read, remember/forget is either during stimuli presentation or after
 
 
-if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && during_after_assignment == "during") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
+/*if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && during_after_assignment == "during") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
   stimuli = studylist1_mixed;
   stimuli_test = testlist1;
   front_buffer_list = frontbufferlist_mixed;
@@ -360,12 +360,12 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
   post_practice_text2 = post_practice_text2_DF;
   test_instruction_text = test_instruction_text_DF;
   study_procedure = study_procedure_during;
-};
+}; */
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////                                 Cue presentation AFTER randomization               //////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/*} else if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && during_after_assignment == "after") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
+if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && during_after_assignment == "after") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
   stimuli = studylist1_mixed;
   //stimuli_black = studylist1_mixed_black;
   stimuli_test = testlist1;
@@ -627,7 +627,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
   post_practice_text2 = post_practice_text2_DF;
   test_instruction_text = test_instruction_text_DF;
   study_procedure = study_procedure_after;
-}; */
+}; 
 
 
 //console.table(stimuli);
