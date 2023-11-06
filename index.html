@@ -68,17 +68,17 @@
 //                       Randomly Assign one of the between-subjects counterbalanced lists, experiments and cue conditions                      //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var experiment_assignment = jsPsych.randomization.sampleWithoutReplacement(['production_effect', 'directed_forgetting'], 1)[0];
+var experiment_assignment = jsPsych.randomization.sampleWithoutReplacement(['production_effect', 'production_effect'], 1)[0]; //changed to only PE
 jsPsych.data.addProperties({
   experiment: experiment_assignment
 });
 
-var during_after_assignment = jsPsych.randomization.sampleWithoutReplacement(['during', 'after'], 1)[0]; 
+var during_after_assignment = jsPsych.randomization.sampleWithoutReplacement(['during', 'during'], 1)[0]; //chagned to only during
 jsPsych.data.addProperties({
   cue_presentation: during_after_assignment
 });
 
-var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(['pureproduce', 'pureproduce', 'pureproduce'], 1)[0]; //changed to only PP
+var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(['pureread', 'pureread', 'pureread'], 1)[0]; //changed to only PR
 jsPsych.data.addProperties({
   condition: condition_assignment
 });
@@ -107,7 +107,7 @@ var post_practice_text2 = [];
 var test_instruction_text = [];
 var study_procedure = []; //cue to produce/read, remember/forget is either during stimuli presentation or after
 
-// if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && during_after_assignment == "during") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
+/* if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && during_after_assignment == "during") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
 //   stimuli = studylist1_mixed;
 //   stimuli_test = testlist1;
 //   front_buffer_list = frontbufferlist_mixed;
@@ -627,10 +627,10 @@ if (condition_assignment == "pureproduce" && list_assignment =="List1" && experi
 //   post_practice_text2 = post_practice_text2_DF;
 //   test_instruction_text = test_instruction_text_DF;
 //   study_procedure = study_procedure_after;
-}; 
+}; */
 
 
-/*if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && during_after_assignment == "during") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
+if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_assignment =="production_effect" && during_after_assignment == "during") { //if List1 is sampled from above randomization routine, the stimuli presented will be...
   stimuli = studylist1_mixed;
   stimuli_test = testlist1;
   front_buffer_list = frontbufferlist_mixed;
@@ -1149,7 +1149,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" && experiment_
   post_practice_text2 = post_practice_text2_DF;
   test_instruction_text = test_instruction_text_DF;
   study_procedure = study_procedure_after;
-}; */
+}; 
 
 
 //console.table(stimuli);
