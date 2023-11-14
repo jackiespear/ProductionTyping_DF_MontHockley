@@ -68,7 +68,7 @@
 //                       Randomly Assign one of the between-subjects counterbalanced lists, experiments and cue conditions                      //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var experiment_assignment = jsPsych.randomization.sampleWithoutReplacement(['directed_forgetting', 'directed_forgetting'], 1)[0]; //changed to only DF
+var experiment_assignment = jsPsych.randomization.sampleWithoutReplacement(['production_effect', 'production_effect'], 1)[0]; //changed to only DF
 jsPsych.data.addProperties({
   experiment: experiment_assignment
 });
@@ -78,7 +78,7 @@ jsPsych.data.addProperties({
   cue_presentation: during_after_assignment
 });
 
-var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(['mixed', 'mixed', 'mixed'], 1)[0]; //changed to only mixed
+var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(['pureproduce', 'pureproduce', 'pureproduce'], 1)[0]; //changed to only mixed
 jsPsych.data.addProperties({
   condition: condition_assignment
 });
