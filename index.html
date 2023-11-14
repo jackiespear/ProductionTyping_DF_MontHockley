@@ -73,7 +73,7 @@ jsPsych.data.addProperties({
   experiment: experiment_assignment
 });
 
-var during_after_assignment = jsPsych.randomization.sampleWithoutReplacement(['after', 'after'], 1)[0]; //chagned to only during
+var during_after_assignment = jsPsych.randomization.sampleWithoutReplacement(['during', 'during'], 1)[0]; //chagned to only during
 jsPsych.data.addProperties({
   cue_presentation: during_after_assignment
 });
