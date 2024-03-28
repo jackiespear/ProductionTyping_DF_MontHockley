@@ -150,49 +150,57 @@ data_count_list <- aggregate(data = dat_test,         #counting how many s's in 
 data_count_list
 
 #return which experiment a to be exluded subject was in
-dat_test$experiment[dat_test$subject=="zfor39eytbtp477"]
+dat_study$experiment[dat_study$subject=="k9mpwe1mz1ygdms"]
 #return which condition a to be exluded subject was in
-dat_test$condition[dat_test$subject=="zfor39eytbtp477"]
+dat_study$condition[dat_study$subject=="k9mpwe1mz1ygdms"]
+dat_study$cue_presentation[dat_study$subject=="k9mpwe1mz1ygdms"] 
 
 dat_test = filter(dat_test,
-                  subject != "0p3px0fxnkj7g9v" &   #watching videos
-                  subject != "uqjl49qkk9z8d6r" ,   #watching hockey
-                  subject != "onwdbuxk8kjqkwg" ,   #watching soccer
-                  subject != "pztrjvrl7b8hkuq" ,   #watching TV
-                  subject != "d08hm7vngj7cm3b" ,   #watching tv
+                  subject != "0p3px0fxnkj7g9v" &   #watching videos - DF, mixed, during
+                  subject != "uqjl49qkk9z8d6r" ,   #watching hockey - DF, PP, during
+                  subject != "onwdbuxk8kjqkwg" ,   #watching soccer - DF, PR, during
+                  subject != "pztrjvrl7b8hkuq" ,   #watching TV - DF, mixed, during
+                  subject != "d08hm7vngj7cm3b" ,   #watching tv - PE, PR, after
+                  subject != "cxg1w6f968t32s5" ,   #watching YouTube - DF, mixed, after
                   
-                  subject != "sea5blthrok29jl" ,   #on phone / texting
-                  subject != "12bnn779kxnalxs" ,   #on phone
-                  subject != "kkaerrm54g92nuj" ,   #on phone
-                  subject != "a4pm6j483yzxno2" ,   #on phone
-                  subject != "yv7e4u72x2fseu4" ,   #on phone
-                  subject != "oy0a4xrh0uwtzbh" ,   #on phone
+                  subject != "sea5blthrok29jl" ,   #on phone - DF, mixed, after
+                  subject != "12bnn779kxnalxs" ,   #on phone - PE, PR, after
+                  subject != "kkaerrm54g92nuj" ,   #on phone - PE, mixed, during 
+                  subject != "a4pm6j483yzxno2" ,   #on phone - DF, PR, after
+                  subject != "yv7e4u72x2fseu4" ,   #on phone - DF, PR, during
+                  subject != "oy0a4xrh0uwtzbh" ,   #on phone - DF, PR, after
+                  subject != "37d7zjkrj9ccr4o" ,   #on phone - DF, mixed, after
                   
-                  subject != "bcytnw2n9ltr2y9" ,   #listening to podcast
-                  subject != "j00dq1rqdav2zkh" ,   #playing games
-                  subject != "qgqdo9sl84ofh67" ,   #cooking
-                  subject != "4wfd8x7c8grd58k" ,   #packing a bag
+                  subject != "bcytnw2n9ltr2y9" ,   #listening to podcast - DF, PP, during
+                  subject != "0v9g965xut6zhvw" ,   #listening to music - PE, PP, after
+                  subject != "kwfq4vy2uxlnnh5" ,   #listening to music - DF, PP, after
+                  subject != "ln5gy7skfmj0jlh" ,   #listening to music - DF, PR, after
+                  subject != "j00dq1rqdav2zkh" ,   #playing games - PE, PP, during
+                  subject != "qgqdo9sl84ofh67" ,   #cooking - DF, mixed, after
+                  subject != "4wfd8x7c8grd58k" ,   #packing a bag - PE, PR, during
                   
-                  subject != "9lhgaobjuvcs1zw" ,   #reading a comic
-                  subject != "2f3kprjv0xkktqo" ,   #studying for exam
+                  subject != "9lhgaobjuvcs1zw" ,   #reading a comic - DF, PP, after
+                  subject != "2f3kprjv0xkktqo" ,   #studying for exam - DF, PP, after
                   
-                  subject != "2xse07c8318l2vg" ,   #in class
-                  subject != "a0yacofy8tu4eos" ,   #in class
-                  subject != "aofy27d5u68f3ez" ,   #in class
-                  subject != "b1rfgz4pf2gocj3" ,   #in class
-                  subject != "bxr2z4kp7oyu4e7" ,   #in class
-                  subject != "dtf0c6mp66u06tn" ,   #in class
-                  subject != "gztlc2rt3v8jbpb" ,   #in class
-                  subject != "uce9py8wh3sz15z" ,   #in class
-                  subject != "x2l0phs4ypppvs2" ,   #in class
-                  subject != "zfor39eytbtp477" ,   #in class
+                  subject != "2xse07c8318l2vg" ,   #in class - PE, mixed, during
+                  subject != "a0yacofy8tu4eos" ,   #in class - PE, PR, after
+                  subject != "aofy27d5u68f3ez" ,   #in class - PE, mixed, after
+                  subject != "b1rfgz4pf2gocj3" ,   #in class - PE, mixed, during
+                  subject != "bxr2z4kp7oyu4e7" ,   #in class - PE, mixed, during
+                  subject != "dtf0c6mp66u06tn" ,   #in class - PE, mixed during
+                  subject != "gztlc2rt3v8jbpb" ,   #in class - DF, PP, during
+                  subject != "uce9py8wh3sz15z" ,   #in class - DF, mixed, during
+                  subject != "x2l0phs4ypppvs2" ,   #in class - DF, mixed, after
+                  subject != "zfor39eytbtp477" ,   #in class - DF, PR, during
                   
-                  subject != "e239v8wy8sbl58b" ,   #talking
-                  subject != "fqsyenqhgk8dax0" ,   #talking
-                  subject != "rnwade8mh0yfdrz" ,   #talking
-                  subject != "k9mpwe1mz1ygdms" ,   #talking
-                  subject != "4deflyzdtaw90hl" ,   #talking
-                  subject != "4ghgtf6jbhc2e8r" ,   #talking
+                  subject != "0z6rl42o4wfx448",    #talking - DF, PR, after
+                  subject != "e239v8wy8sbl58b" ,   #talking - PE, PR, during
+                  subject != "fqsyenqhgk8dax0" ,   #talking - PE, mixed, after
+                  subject != "rnwade8mh0yfdrz" ,   #talking - DF, PP, after
+                  subject != "k9mpwe1mz1ygdms" ,   #talking - DF, PR, during
+                  subject != "4deflyzdtaw90hl" ,   #talking - PE, PR, during
+                  subject != "4ghgtf6jbhc2e8r" ,   #talking - PE, PR, during
+                  subject != "k9mpwe1mz1ygdms" ,   #talking - DF, PR, during
 )
 
 data_count_list <- aggregate(data = dat_test,       #counting how many s's in each list
@@ -465,7 +473,7 @@ Step2_pureread_PE_after_reordered <- Step2_pureread_PE_after[match(vec3, Step2_p
 Step2_pureread_DF_during_reordered <- Step2_pureread_DF_during[match(vec3, Step2_pureread_DF_during$TargetLureType), ]
 Step2_pureread_DF_after_reordered <- Step2_pureread_DF_after[match(vec3, Step2_pureread_DF_after$TargetLureType), ]
 
-color_hex <- c("#0E1428","#0E1428", "#E7DFC6", "#E7DFC6", "#E7DFC6")
+#color_hex <- c("#0E1428","#0E1428", "#E7DFC6", "#E7DFC6", "#E7DFC6")
 
 G1 <- ggplot(Step2_mixed_PE_during_reordered, aes(x=factor(TargetLureType, level=c('produce_hit', 'read_hit', 'produce_FA', 'read_FA', 'unrel_FA')), y = means)) +
   geom_bar(stat = "identity", color="black", fill = c("#80c841","#ED6A5A", "#839d6c", "#b69591", "#AEAEAE")) +
@@ -499,7 +507,7 @@ G2 <- G2 + ggtitle("Mixed - DF - During") +
   theme(axis.text.x = element_text(vjust = 3)) +
   geom_vline(xintercept=2.5,linetype=3) +
   #geom_col() +
-  scale_x_discrete(labels=c('Produced \n Hits', 'Read \n Hits', 'Produce \n FA', 'Read \n FA', 'Unrelated \n FA')) +
+  scale_x_discrete(labels=c('Remember \n Hits', 'Forget \n Hits', 'Remember \n FA', 'Forget \n FA', 'Unrelated \n FA')) +
   geom_errorbar(aes(ymin=means-sds, ymax=means+sds), width=.2,
                 position=position_dodge(.9)) +
   theme(axis.text.x = element_text(size = 8),
@@ -537,7 +545,7 @@ G4 <- G4 + ggtitle("Mixed - DF - After") +
   theme(axis.text.x = element_text(vjust = 3)) +
   geom_vline(xintercept=2.5,linetype=3) +
   #geom_col() +
-  scale_x_discrete(labels=c('Produced \n Hits', 'Read \n Hits', 'Produce \n FA', 'Read \n FA', 'Unrelated \n FA')) +
+  scale_x_discrete(labels=c('Remember \n Hits', 'Forget \n Hits', 'Remember \n FA', 'Forget \n FA', 'Unrelated \n FA')) +
   geom_errorbar(aes(ymin=means-sds, ymax=means+sds), width=.2,
                 position=position_dodge(.9)) +
   theme(axis.text.x = element_text(size = 8),
@@ -567,14 +575,14 @@ G6 <- ggplot(Step2_pureproduce_DF_during_reordered, aes(x=factor(TargetLureType,
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank())
 
-G6 <- G6 + ggtitle("Pure Produce - DF - During") +
+G6 <- G6 + ggtitle("Pure Remember - DF - During") +
   xlab("Condition") + ylab("Proportion Old") +
   ylim(-0.01,1) +
   theme(plot.title = element_text(hjust = 0.5)) +
   theme(axis.text.x = element_text(vjust = 3)) +
   geom_vline(xintercept=1.5,linetype=3) +
   #geom_col() +
-  scale_x_discrete(labels=c('\n Produce \n Hit', '\n Produce \n FA', '\n Unrelated \n FA')) +
+  scale_x_discrete(labels=c('\n Remember \n Hit', '\n Remember \n FA', '\n Unrelated \n FA')) +
   geom_errorbar(aes(ymin=means-sds, ymax=means+sds), width=.2,
                 position=position_dodge(.9)) +
   theme(axis.text.x = element_text(size = 8),
@@ -603,14 +611,14 @@ G8 <- ggplot(Step2_pureproduce_DF_after_reordered, aes(x=factor(TargetLureType, 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank())
 
-G8 <- G8 + ggtitle("Pure Produce - DF - After") +
+G8 <- G8 + ggtitle("Pure Remember - DF - After") +
   xlab("Condition") + ylab("Proportion Old") +
   ylim(-0.01,1) +
   theme(plot.title = element_text(hjust = 0.5)) +
   theme(axis.text.x = element_text(vjust = 3)) +
   geom_vline(xintercept=1.5,linetype=3) +
   #geom_col() +
-  scale_x_discrete(labels=c('\n Produce \n Hit', '\n Produce \n FA', '\n Unrelated \n FA')) +
+  scale_x_discrete(labels=c('\n Remember \n Hit', '\n Remember \n FA', '\n Unrelated \n FA')) +
   geom_errorbar(aes(ymin=means-sds, ymax=means+sds), width=.2,
                 position=position_dodge(.9)) +
   theme(axis.text.x = element_text(size = 8),
@@ -642,14 +650,14 @@ G10 <- ggplot(Step2_pureread_DF_during_reordered, aes(x = reorder(TargetLureType
         panel.background = element_blank()
   )
 
-G10 <- G10 + ggtitle("Pure Read - DF - During") +
+G10 <- G10 + ggtitle("Pure Forget - DF - During") +
   xlab("Condition") + ylab("Proportion Old") +
   ylim(-0.01,1) +
   theme(plot.title = element_text(hjust = 0.5)) +
   theme(axis.text.x = element_text(vjust = 3)) +
   #geom_col() +
   geom_vline(xintercept= 1.5, linetype=3) +
-  scale_x_discrete(labels=c('\n Read \n Hits', '\n Read \n FA', '\n Unrelated \n FA')) +
+  scale_x_discrete(labels=c('\n Forget \n Hits', '\n Forget \n FA', '\n Unrelated \n FA')) +
   geom_errorbar(aes(ymin=means-sds, ymax=means+sds), width=.2,
                 position=position_dodge(.9)) +
   theme(axis.text.x = element_text(size = 8),
@@ -680,14 +688,14 @@ G12 <- ggplot(Step2_pureread_DF_after_reordered, aes(x = reorder(TargetLureType,
         panel.background = element_blank()
   )
 
-G12 <- G12 + ggtitle("Pure Read - DF - After") +
+G12 <- G12 + ggtitle("Pure Forget - DF - After") +
   xlab("Condition") + ylab("Proportion Old") +
   ylim(-0.01,1) +
   theme(plot.title = element_text(hjust = 0.5)) +
   theme(axis.text.x = element_text(vjust = 3)) +
   #geom_col() +
   geom_vline(xintercept= 1.5, linetype=3) +
-  scale_x_discrete(labels=c('\n Read \n Hits', '\n Read \n FA', '\n Unrelated \n FA')) +
+  scale_x_discrete(labels=c('\n Forget \n Hits', '\n Forget \n FA', '\n Unrelated \n FA')) +
   geom_errorbar(aes(ymin=means-sds, ymax=means+sds), width=.2,
                 position=position_dodge(.9)) +
   theme(axis.text.x = element_text(size = 8),
@@ -850,10 +858,10 @@ t_test_pureproduce_PE_during2 <- t.test(as.matrix(data_wide_pure_produce) %*% c(
 t_test_summary7 <- data.frame(
   condition = c("Pure-produce PE during"),
   comparison = c("Old vs. new"),
-  t_statistic = t_test_pureproduce_PE_during[[1]],
-  df = t_test_pureproduce_PE_during[[2]],
-  p_value = t_test_pureproduce_PE_during[[3]],
-  std_err = t_test_pureproduce_PE_during[[7]])
+  t_statistic = t_test_pureproduce_PE_during2[[1]],
+  df = t_test_pureproduce_PE_during2[[2]],
+  p_value = t_test_pureproduce_PE_during2[[3]],
+  std_err = t_test_pureproduce_PE_during2[[7]])
 
 #pure read contrasts
 data_wide_pure_read <- dcast(dat_test_pureread2, subject ~ TargetLureType, value.var="response",fun.aggregate=mean)
@@ -1000,10 +1008,10 @@ t_test_pureproduce_PE_during2 <- t.test(as.matrix(data_wide_pure_produce) %*% c(
 t_test_summary7 <- data.frame(
   condition = c("Pure-produce PE during"),
   comparison = c("Old vs. new"),
-  t_statistic = t_test_pureproduce_PE_during[[1]],
-  df = t_test_pureproduce_PE_during[[2]],
-  p_value = t_test_pureproduce_PE_during[[3]],
-  std_err = t_test_pureproduce_PE_during[[7]])
+  t_statistic = t_test_pureproduce_PE_during2[[1]],
+  df = t_test_pureproduce_PE_during2[[2]],
+  p_value = t_test_pureproduce_PE_during2[[3]],
+  std_err = t_test_pureproduce_PE_during2[[7]])
 
 #pure read contrasts
 data_wide_pure_read <- dcast(dat_test_pureread2, subject ~ TargetLureType, value.var="response",fun.aggregate=mean)
@@ -1150,10 +1158,10 @@ t_test_pureproduce_PE_during2 <- t.test(as.matrix(data_wide_pure_produce) %*% c(
 t_test_summary7 <- data.frame(
   condition = c("Pure-remember DF during"),
   comparison = c("Old vs. new"),
-  t_statistic = t_test_pureproduce_PE_during[[1]],
-  df = t_test_pureproduce_PE_during[[2]],
-  p_value = t_test_pureproduce_PE_during[[3]],
-  std_err = t_test_pureproduce_PE_during[[7]])
+  t_statistic = t_test_pureproduce_PE_during2[[1]],
+  df = t_test_pureproduce_PE_during2[[2]],
+  p_value = t_test_pureproduce_PE_during2[[3]],
+  std_err = t_test_pureproduce_PE_during2[[7]])
 
 #pure read contrasts
 data_wide_pure_read <- dcast(dat_test_pureread2, subject ~ TargetLureType, value.var="response",fun.aggregate=mean)
@@ -1300,10 +1308,10 @@ t_test_pureproduce_PE_during2 <- t.test(as.matrix(data_wide_pure_produce) %*% c(
 t_test_summary7 <- data.frame(
   condition = c("Pure-remember DF after"),
   comparison = c("Old vs. new"),
-  t_statistic = t_test_pureproduce_PE_during[[1]],
-  df = t_test_pureproduce_PE_during[[2]],
-  p_value = t_test_pureproduce_PE_during[[3]],
-  std_err = t_test_pureproduce_PE_during[[7]])
+  t_statistic = t_test_pureproduce_PE_during2[[1]],
+  df = t_test_pureproduce_PE_during2[[2]],
+  p_value = t_test_pureproduce_PE_during2[[3]],
+  std_err = t_test_pureproduce_PE_during2[[7]])
 
 #pure read contrasts
 data_wide_pure_read <- dcast(dat_test_pureread2, subject ~ TargetLureType, value.var="response",fun.aggregate=mean)
