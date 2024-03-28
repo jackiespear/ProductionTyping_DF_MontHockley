@@ -10,8 +10,8 @@ devtools::install_github("Kohze/fireData")
 library(fireData) # https://github.com/Kohze/fireData
 dataBackup(projectURL = "https://ProductionDFMontHockley-default-rtdb.firebaseio.com/",   #change
            secretKey = "p7bXx8s6R4DKWRDm0FDygznUqfVLaeF68deQsVsO",     #change
-           "/Users/jackiespear/ProductionDFMontHockley.json")
-#"/Users/umspear-ins/productiontyping3.json")              #change 
+           #"/Users/jackiespear/ProductionDFMontHockley.json")
+            "/Users/umspear-ins/ProductionDFMontHockley.json")              #change 
 
 ##############################################################################
 library("tidyverse")
@@ -19,7 +19,7 @@ library(tidyr)
 library(plyr)
 #install.packages("jsonlite")
 library("jsonlite")
-data<-unlist(jsonlite::fromJSON("/Users/jackiespear/ProductionDFMontHockley.json"), recursive = FALSE, use.names = TRUE)
+data<-unlist(jsonlite::fromJSON("/Users/umspear-ins/ProductionDFMontHockley.json"), recursive = FALSE, use.names = TRUE) #change
 #install.packages("dplyr")
 library(dplyr)
 
@@ -50,9 +50,9 @@ attention_checks <- data %>%
   group_by(subject) %>%
   dplyr::summarise(Number = sum(phase == "Attention_Check", na.rm=TRUE))
 
-#data <- data %>% unnest_wider(data, names_sep = "_")
-
-data <- unnest_wider(data = data,col = c(data, type), names_sep = "_")
+data <- data %>% unnest_wider(data, names_sep = "_")
+data <- unnest_wider(data = data, col = type, names_sep = "_", names_repair = "check_unique")
+data <- unnest_wider(data = data,col = c(type, data), names_sep = "_")
 
 data <- data %>% 
   dplyr::rename("category" = "data_category",
